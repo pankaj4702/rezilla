@@ -1,0 +1,10 @@
+.check-flex-container {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+.check-flex-item {
+    width: 7em;
+    padding: 10px;
+}
