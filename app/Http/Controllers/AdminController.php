@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser};
+use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service};
 use DB;
 use Hash;
 use Session;
@@ -194,4 +194,156 @@ class AdminController extends Controller
                 return redirect()->back();
             }
         }
+
+        public function getAssetManagement(){
+            $assets = AssetManagement::where('status', 1)->get();
+            return view('admin.services.assetManage',compact('assets'));
+        }
+
+        public function storeAsset(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:30',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = AssetManagement::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back();
+            }
+        }
+
+        public function removeAsset($id){
+            $assetId = decrypt($id);
+            $asset = AssetManagement::find($assetId);
+            if ($asset) {
+                $asset->status = 0;
+                // Save the changes
+                $asset->save();
+                return redirect()->back();
+            }
+        }
+
+        public function getAssetCommercial(){
+            $assets = Commercial::where('status', 1)->get();
+            return view('admin.services.commercial',compact('assets'));
+        }
+
+        public function storeCommercial(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:30',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = Commercial::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back();
+            }
+        }
+
+        public function removeCommercial($id){
+            $assetId = decrypt($id);
+            $asset = Commercial::find($assetId);
+            if ($asset) {
+                $asset->status = 0;
+                // Save the changes
+                $asset->save();
+                return redirect()->back();
+            }
+        }
+
+        public function getHolidayHomes(){
+            $assets = Holiday_Homes::where('status', 1)->get();
+            return view('admin.services.holidayHomes',compact('assets'));
+        }
+
+        public function storeHolidayHomesService(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:50',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = Holiday_Homes::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back();
+            }
+        }
+        public function removeHolidayHomesService($id){
+            $assetId = decrypt($id);
+            $asset = Holiday_Homes::find($assetId);
+            if ($asset) {
+                $asset->status = 0;
+                // Save the changes
+                $asset->save();
+                return redirect()->back();
+            }
+        }
+
+        public function getService(){
+            $assets = Service::where('status', 1)->get();
+            return view('admin.services.Services',compact('assets'));
+        }
+
+        public function storeService(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:50',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = Service::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back();
+            }
+        }
+
+        public function removeService($id){
+            $assetId = decrypt($id);
+            $asset = Service::find($assetId);
+            if ($asset) {
+                $asset->status = 0;
+                // Save the changes
+                $asset->save();
+                return redirect()->back();
+            }
+        }
+
 }

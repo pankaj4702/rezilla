@@ -29,6 +29,27 @@ Route::prefix('/admin')->group(function () {
     Route::get('/add-post-user',[AdminController::class,'addPostUser'])->name('addPostUser');
     Route::post('/store-post-user',[AdminController::class,'storePostUser'])->name('storePostUser');
     Route::get('/project-detail/{id}',[AdminController::class,'project_detail'])->name('project_detail');
+    Route::get('/add-asset-management',[AdminController::class,'getAssetManagement'])->name('getAssetManagement');
+    Route::post('/store-asset-management',[AdminController::class,'storeAsset'])->name('storeAsset');
+    Route::get('/asset-delete/{id}',[AdminController::class,'removeAsset'])->name('removeAsset');
+});
+
+Route::prefix('/admin/service')->group(function () {
+    Route::get('/asset-management',[AdminController::class,'getAssetManagement'])->name('getAssetManagement');
+    Route::post('/store-asset-management',[AdminController::class,'storeAsset'])->name('storeAsset');
+    Route::get('/asset-delete/{id}',[AdminController::class,'removeAsset'])->name('removeAsset');
+
+    Route::get('/commercial',[AdminController::class,'getAssetCommercial'])->name('getAssetCommercial');
+    Route::post('/store-commercial',[AdminController::class,'storeCommercial'])->name('storeCommercial');
+    Route::get('/comm-delete/{id}',[AdminController::class,'removeCommercial'])->name('removeCommercial');
+
+    Route::get('/holiday-homes',[AdminController::class,'getHolidayHomes'])->name('getHolidayHomesService');
+    Route::post('/store-holidayhome',[AdminController::class,'storeHolidayHomesService'])->name('storeHolidayHomesService');
+    Route::get('/holi-homes-delete/{id}',[AdminController::class,'removeHolidayHomesService'])->name('removeHolidayHomesService');
+
+    Route::get('/comprehensive-service',[AdminController::class,'getService'])->name('getService');
+    Route::post('/store-comprehensive-service',[AdminController::class,'storeService'])->name('storeService');
+    Route::get('/service-delete/{id}',[AdminController::class,'removeService'])->name('removeService');
 });
 
 
@@ -65,7 +86,9 @@ Route::get('/send-mail',[MailController::class,'index'])->name('subscribe');
 
 
 // services
-Route::get('/get-asset-management',[ServiceController::class,'getAsset'])->name('getAsset');
-Route::get('/get-holiday-homes',[ServiceController::class,'getHolidayHomes'])->name('getHolidayHomes');
-Route::get('/get-commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
+Route::prefix('/services')->group(function () {
+Route::get('/asset-management',[ServiceController::class,'getAsset'])->name('getAsset');
+Route::get('/holiday-homes',[ServiceController::class,'getHolidayHomes'])->name('getHolidayHomes');
+Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
 
+});

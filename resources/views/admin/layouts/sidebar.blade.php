@@ -71,6 +71,41 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>
+                       Services
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="{{ route('getAssetManagement') }}" class="nav-link {{ request()->is('admin/add-asset-management') ? 'active' : '' }}">
+                            <i class="fas fa-tasks nav-icon"></i>
+                          <p> Asset Management</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('getHolidayHomesService') }}" class="nav-link">
+                          <i class="fas fa-igloo nav-icon"></i>
+                          <p>Holiday Homes</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('getAssetCommercial') }}" class="nav-link">
+                          <i class="fas fa-warehouse nav-icon"></i>
+                          <p>Commercial</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('getService') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Services</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
               <li class="nav-item">
                 <a href="{{route('property_attribute')}}" class="nav-link {{ request()->is('admin/add-property-attributes') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -95,67 +130,9 @@
                   <p>Post User</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
