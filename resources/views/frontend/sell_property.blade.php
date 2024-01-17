@@ -1,5 +1,101 @@
 @extends('frontend.main.main')
 @section('content_front')
+<style>
+    /* Custom styles for pink buttons */
+     #subs-pills{
+        font-family: Bell MT;
+    }
+    .nav-pills .nav-link.active, .nav-pills .nav-link:focus, .nav-pills .nav-link:active {
+        background-color: black;
+        color: white;
+    }
+    .nav-pills .nav-link {
+        color: black;
+        }
+    .continue{
+        background-color: black;
+        color: white;
+        border:none;
+        width:100%;
+        padding: 7px 0px;
+        border-radius: 5px;
+    }
+    .price-contain{
+        display: flex;
+        gap: 170px;
+    }
+    .package-div{
+
+    }
+</style>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Subscription
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Subscription</h1>
+          <P style="font-size: 12px;">Add the first property for <b>Free</b> and choose a subscription !</P>
+        </div>
+        <div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        </div>
+        <div class="modal-body">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active"  id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Basic</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link"  id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Standerd</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Premium</button>
+                </li>
+              </ul><hr>
+              <div class="tab-content" id="subs-pills">
+
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0"><div class="price-contain">
+                   <div class="package-div" ><h5><b>BASIC PACKAGE </b></h5></div>
+                    <div><h5>500/mo.</h5></div>
+                </div><br>
+                    <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
+                    <div> <a href="{{route('montlyPlan')}}"><button type="button"  class=" continue">Continue &#x2192;</button></a></div>
+                    </div>
+
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                    <div class="price-contain">
+                        <div class="package-div"><h5><b>STANDARD PACKAGE </b></h5></div>
+                        <div><h5>1000/mo.</h5></div>
+                    </div><br>
+                    <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
+                    <div> <a href=""><button type="button"  class=" continue">Continue &#x2192;</button></a></div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0"><div class="price-contain">
+                    <div class="package-div"><h5><b>PREMIUM PACKAGE </b></h5></div>
+                    <div><h5>1500/mo.</h5></div>
+                </div><br>
+                    <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
+                    <div> <a href=""><button type="button"  class="continue">Continue &#x2192;</button></a></div>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    --}}
+          {{-- <div></div> --}}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
     <!--Asset-Banner-section-->
     <section class="asset-banner-comman sell-property-banner">
         <div class="container">
@@ -77,13 +173,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="col-md-8" >
-
-                                                </div> --}}
-                                                {{-- <div class="row" id="bedroom-div">
-
-                                                </div> --}}
-
 
                                                 <div class="col-md-4" id="area-div">
                                                     <div class="property-listing-tab-content">
@@ -458,19 +547,12 @@
             </div>
         </div>
     </section>
-
-    {{-- <script>
-            $("document").ready(function () {
-                alert('activeTab');
-                $(".asset-faq-bottom .accordion-item").click(function () {
-                    $(".asset-faq-bottom .accordion-item").removeClass("active");
-                    $(this).addClass("active");
-                });
-            });
-        </script> --}}
-
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-
+    <script>
+            $("document").ready(function () {
+                $("#modalBtn").click();
+            });
+        </script>
     <script>
         function save_sell_list() {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');

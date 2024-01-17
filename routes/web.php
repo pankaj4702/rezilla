@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PaymentController;
 
 
 // Admin
@@ -90,5 +91,6 @@ Route::prefix('/services')->group(function () {
 Route::get('/asset-management',[ServiceController::class,'getAsset'])->name('getAsset');
 Route::get('/holiday-homes',[ServiceController::class,'getHolidayHomes'])->name('getHolidayHomes');
 Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
-
 });
+
+Route::get('/monthlyPlan',[PaymentController::class,'createPlan'])->name('montlyPlan');

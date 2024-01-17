@@ -4,7 +4,8 @@
         <script src="{{ asset('js/jquery-3.2.1.slim.min.js')}}"></script>
         <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
         <script src="{{ asset('js/myjs.js') }}"></script>
-       
+
+
         <script>
             $(".banner-left-slider-inner").owlCarousel({
                 loop: true,

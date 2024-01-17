@@ -144,8 +144,9 @@ class HomeController extends Controller
         $property = Property::join('property__types', 'properties.property_type', '=', 'property__types.id')
         ->join('property_sources', 'properties.property_source', '=', 'property_sources.id')
         ->join('property_status', 'properties.property_status', '=', 'property_status.id')
+        ->join('users','properties.user_id','users.id')
         ->where('properties.id', $pro_id)
-        ->select('properties.id','property__types.name as type','properties.property_type as type_id','property_sources.name as source','property_status.name as status','properties.porperty_name','properties.user_id','properties.property_location','properties.category','properties.message','properties.area','properties.price','properties.bedroom','properties.bathroom','properties.images')
+        ->select('properties.id','property__types.name as type','properties.property_type as type_id','property_sources.name as source','property_status.name as status','properties.porperty_name','properties.user_id','users.phone as contact','properties.property_location','properties.category','properties.message','properties.area','properties.price','properties.bedroom','properties.bathroom','properties.images')
         ->first();
 
             $property->images = explode(',', $property->images);

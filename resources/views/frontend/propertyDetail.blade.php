@@ -32,18 +32,6 @@
                                                         </div>
                                                         @php $i++; @endphp
                                                         @endforeach
-                                                        {{-- <div class="column">
-                                                            <img class="slide-thumbnail" src="{{ asset('images/apart-two.png') }}" onclick="currentSlide(2)" alt="Caption Two" />
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="slide-thumbnail" src="{{ asset('images/apart-three.png') }}" onclick="currentSlide(3)" alt="Caption Three" />
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="slide-thumbnail" src="{{ asset('images/apart-four.png') }}" onclick="currentSlide(4)" alt="Caption Four" />
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="slide-thumbnail" src="{{ asset('images/apart-four.png') }}" onclick="currentSlide(5)" alt="Caption Five" />
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                                 <div class="holder">
@@ -52,21 +40,6 @@
                                                         <img  src="{{ asset('storage/' . $image) }}" alt="" />
                                                     </div>
                                                     @endforeach
-                                                    {{-- <div class="slides">
-                                                        <img src="{{ asset('images/apart-two.png') }}" />
-                                                    </div>
-
-                                                    <div class="slides">
-                                                        <img src="{{ asset('images/apart-three.png') }}" />
-                                                    </div>
-
-                                                    <div class="slides">
-                                                        <img src="{{ asset('images/apart-four.png') }}" />
-                                                    </div>
-
-                                                    <div class="slides">
-                                                        <img src="{{ asset('images/apart-four.png') }}" />
-                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -76,9 +49,9 @@
                                     <div class="apartment-single-right">
                                         <div class="apartment-single-right-head">
                                             <div class="apart-emi">
-                                                <button type="button" class="emi-btn">
-                                                    Popular
-                                                </button>
+                                                    <button type="button" class="emi-btn">
+                                                        Popular
+                                                    </button>
                                                 <h2>₹{{ $property->price }}</h2>
                                                 <p>Estimated EMI $ 1,970</p>
                                             </div>
@@ -424,7 +397,11 @@
 
                         </div>
                          <div class="col-md-3">
-                            <div class="consider-right">
+                            <div style="font-size: 100px;
+                            float: right;">
+                            <a href="https://wa.me/91{{ $property->contact }}" style="color: #3f9f3f;"><i class="fab fa-whatsapp-square"></i></a>
+                            </div>
+                         {{--    <div class="consider-right">
                             <div class="consider-right-content">
                                 <figure>
                                     <img src="{{ asset('images/call.png') }}">
@@ -463,7 +440,7 @@
                                 </div>
 
                             </form>
-                            </div>
+                            </div>--}}
 
                         </div>
                     </div>
