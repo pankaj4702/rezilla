@@ -71,7 +71,7 @@ $accessToken = $accessTokenData['access_token'];
                             'interval_unit' => 'MONTH',
                             'interval_count' => 1,
                         ],
-                        'tenure_type' => 'TRIAL',
+                        'tenure_type' => 'TRIAL',               
                         'sequence' => 1,
                         'total_cycles' => 1,
                     ],

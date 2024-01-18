@@ -10,6 +10,8 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\FestivalGreetingController;
+use App\Http\Controllers\EventController;
 
 
 // Admin
@@ -93,4 +95,12 @@ Route::get('/holiday-homes',[ServiceController::class,'getHolidayHomes'])->name(
 Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
 });
 
+// Events
+Route::prefix('/services')->group(function () {
+Route::get('/send-mail',[EventController::class,'sendMail'])->name('sendQueueMail');
+Route::post('/add-mail',[EventController::class,'addMail'])->name('addQueueMail');
+
+});
+
 Route::get('/monthlyPlan',[PaymentController::class,'createPlan'])->name('montlyPlan');
+Route::get('/send-mymail',[FestivalGreetingController::class,'sendGreetings'])->name('sendGreetings');

@@ -12,8 +12,10 @@ class ProfileController extends Controller
         $cities = City::all();
         $userId = session('user_id');
         $user_a = User::find($userId);
+
         if(isset($user_a->city)||isset($user_a->dob)){
         $user = User::join('cities', 'users.city', 'cities.id')->where('users.id', $userId)->first(['users.id','cities.name as city_name','users.name','city','phone','dob','email']);
+
         return view('frontend.profile',compact('user','cities'));
         }
         else{

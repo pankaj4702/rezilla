@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commercial extends Model
+class Email_Massage extends Model
 {
     use HasFactory;
-    
-    protected $fillable = [
-        'title',
-        'description',
-        'image',
+    protected $table = 'email_messages';
+    Protected $fillable=[
+        'email_message',
         'status',
     ];
 }

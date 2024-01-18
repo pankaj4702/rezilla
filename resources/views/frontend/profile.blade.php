@@ -16,6 +16,7 @@
                             <form id="profile_form">
                                 <div class="row">
                                 <div class="col-md-4">
+
                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                     <div class="profile-inner-form-content">
                                     <label>Name</label>
