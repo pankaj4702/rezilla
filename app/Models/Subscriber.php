@@ -10,6 +10,9 @@ class Subscriber extends Model
     use HasFactory;
 
     protected $fillable= [
-        'email_address',
+        'user_id',
+        'order_id',
+        'subscription_id',
+        'status',
     ];
 }

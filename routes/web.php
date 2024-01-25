@@ -99,8 +99,15 @@ Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getC
 Route::prefix('/services')->group(function () {
 Route::get('/send-mail',[EventController::class,'sendMail'])->name('sendQueueMail');
 Route::post('/add-mail',[EventController::class,'addMail'])->name('addQueueMail');
+Route::get('/send-msg',[EventController::class,'sendWhatsApp'])->name('sendMsg');
 
 });
 
-Route::get('/monthlyPlan',[PaymentController::class,'createPlan'])->name('montlyPlan');
 Route::get('/send-mymail',[FestivalGreetingController::class,'sendGreetings'])->name('sendGreetings');
+
+Route::get('/monthlyPlan',[PaymentController::class,'createPlan'])->name('montlyPlan');
+Route::get('/create-prod',[PaymentController::class,'createProduct'])->name('createProduct');
+Route::get('/prod-list',[PaymentController::class,'getProductList'])->name('getProductList');
+Route::get('/prod-delete',[PaymentController::class,'deleteProduct'])->name('deleteProduct');
+Route::get('/get-firstPlan',[PaymentController::class,'firstPlan'])->name('firstPlan');
+Route::get('/payment_store',[PaymentController::class,'payment_store'])->name('payment_store');

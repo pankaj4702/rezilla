@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         Spatie\Geocoder\GeocoderServiceProvider::class,
+        App\Providers\TwilioServiceProvider::class,
     ])->toArray(),
 
     /*

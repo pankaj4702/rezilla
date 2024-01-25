@@ -30,9 +30,11 @@
 </style>
 
 <!-- Button trigger modal -->
+@if($subscriber == null)
 <button type="button" class="btn btn-primary d-none" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Subscription
   </button>
+@endif
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -42,10 +44,8 @@
             <div>
           <h1 class="modal-title fs-5" id="exampleModalLabel">Subscription</h1>
           <P style="font-size: 12px;">Add the first property for <b>Free</b> and choose a subscription !</P>
-        </div>
-        <div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            </div>
+           <button type="button" id="clsbtn" class="btn btn-secondary" data-bs-dismiss="modal"> <span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -66,7 +66,7 @@
                     <div><h5>500/mo.</h5></div>
                 </div><br>
                     <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
-                    <div> <a href="{{route('montlyPlan')}}"><button type="button"  class=" continue">Continue &#x2192;</button></a></div>
+                    <div id="paypal-button-container-P-8G715519VC094944SMWYLC5Q"></div>
                     </div>
 
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -75,7 +75,7 @@
                         <div><h5>1000/mo.</h5></div>
                     </div><br>
                     <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
-                    <div> <a href=""><button type="button"  class=" continue">Continue &#x2192;</button></a></div>
+                    <div id="paypal-button-container-s-P-3RK77677LG1149824MWYLC5Y"></div>
                 </div>
 
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0"><div class="price-contain">
@@ -83,12 +83,12 @@
                     <div><h5>1500/mo.</h5></div>
                 </div><br>
                     <div><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A vel accusamus laudantium? Voluptate, amet quibusdam. Ad molestiae magni.</p></div>
-                    <div> <a href=""><button type="button"  class="continue">Continue &#x2192;</button></a></div>
+                    <div id="paypal-button-container-t-P-1A979851D0322544MMWYLC6A"></div>
                 </div>
               </div>
         </div>
         <div class="modal-footer">
-          {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>    --}}
+          {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
           {{-- <div></div> --}}
 
 
@@ -548,8 +548,120 @@
         </div>
     </section>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ad7FmonAEv6O7YQmD4cepFlG96Pa4GbLRMZQgeFTnkOxAGqIpBxTVHESPwfDTghXEKwcS-wqMfnOKD_U&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <script>
+        function mygetfunc(odId, subsId){
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('payment_store') }}",
+                data: {
+                    orderId : odId,
+                    subscriptionId : subsId,
+                },
+                success: function(data) {
+                    if(data.status == 1){
+                        $('#clsbtn').click();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        $.each(xhr.responseJSON.errors, function(key, value) {
+                            console.log(value);
+                        });
+                    } else {
+                        console.error(error);
+                    }
+                }
+            });
+        }
+      </script>
+    <script>
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'black',
+                layout: 'horizontal',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+              var dynamicPlanPrice = 500;
+              return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-8G715519VC094944SMWYLC5Q',
+
+
+              });
+            },
+            onApprove: function(data, actions) {
+            //   alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            if(data.subscriptionID){
+                var orderId = data.orderID;
+                var subscriptionID = data.subscriptionID
+                mygetfunc(orderId, subscriptionID);
+            }
+            }
+        }).render('#paypal-button-container-P-8G715519VC094944SMWYLC5Q'); // Renders the PayPal button
+      </script>
+
+      <script>
+
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'black',
+                layout: 'horizontal',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+              var dynamicPlanPrice = 1000;
+              return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-3RK77677LG1149824MWYLC5Y',
+
+
+              });
+            },
+            onApprove: function(data, actions) {
+            //   alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            if(data.subscriptionID){
+                var orderId = data.orderID;
+                var subscriptionID = data.subscriptionID
+                mygetfunc(orderId, subscriptionID);
+            }
+            }
+        }).render('#paypal-button-container-s-P-3RK77677LG1149824MWYLC5Y'); // Renders the PayPal button
+      </script>
+      <script>
+
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'black',
+                layout: 'horizontal',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+              var dynamicPlanPrice = 1500;
+              return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-1A979851D0322544MMWYLC6A',
+
+
+              });
+            },
+            onApprove: function(data, actions) {
+            //   alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            if(data.subscriptionID){
+                var orderId = data.orderID;
+                var subscriptionID = data.subscriptionID
+                mygetfunc(orderId, subscriptionID);
+            }
+            }
+        }).render('#paypal-button-container-t-P-1A979851D0322544MMWYLC6A'); // Renders the PayPal button
+      </script>
     <script>
             $("document").ready(function () {
+
                 $("#modalBtn").click();
             });
         </script>
@@ -571,7 +683,13 @@
                 success: function(data) {
                     if (data.status == 1) {
                         window.location.reload();
-                    } else {
+                    }
+                    else if(data.status == 0){
+                        alert('Please, check subscription plans first !');
+                        window.location.reload();
+                    }
+
+                    else {
                         $('.error-span-' + data.key).html('');
                         $('.error-span-' + data.key).append(data.error);
                     }
@@ -608,6 +726,11 @@
                     if (data.status == 1) {
                         window.location.reload();
                     }
+                    else if(data.status == 0){
+                        alert('Please, check subscription plans first !');
+                        window.location.reload();
+                    }
+
                 },
                 error: function(xhr, status, error) {
                     if (xhr.responseJSON && xhr.responseJSON.errors) {

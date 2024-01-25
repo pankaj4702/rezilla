@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser};
+use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber};
 use Session;
 use GuzzleHttp\Client;
 use DB;
@@ -36,8 +36,13 @@ class HomeController extends Controller
         $property_sources =Property_source::all();
         $post_users =PostUser::all();
 
+        // check the subscriber
+        $user_id = Session::get('user_id');
+        $subscriber = Subscriber::where('user_id',$user_id)->first();
+
         if (Session::has('user_id')) {
-            return view('frontend.sell_property',compact('property_types','bedrooms','property_status','property_sources','configurations','post_users'));
+
+            return view('frontend.sell_property',compact('property_types','bedrooms','property_status','property_sources','configurations','post_users','subscriber'));
         }
         else{
             return redirect()->route('loginpage');
@@ -61,6 +66,12 @@ class HomeController extends Controller
         ],[
             'configuration.*' => 'This field is required',
         ]);
+
+        $user_id = Session::get('user_id');
+        $subscriber = Subscriber::where('user_id',$user_id)->first();
+          if($subscriber == null){
+            return response()->json(['status'=> 0,'error'=>'something went wrong']);
+          }
 
         $jsonConfiguration = json_encode($request->configuration);
 
