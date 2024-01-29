@@ -6,17 +6,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> Services</h1>
+                    <h1>Investments & Advisory</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active"> Services</li>
+                        <li class="breadcrumb-item active">Investments & Advisory</li>
                     </ol>
                 </div>
-            </div>
-            <div style="text-align: end;">
-                <a href="{{ route('allServices') }}"><button class="btn btn-primary">Show all</button></a>
             </div>
         </div>
     </section>
@@ -26,10 +23,10 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add Services </h3>
+                            <h3 class="card-title">Add  </h3>
                         </div>
                         @if (count($errors) > 0)
-                            <div class = "alert alert-danger">
+                            <div class = "alert admin-alert">
                                 <ul class="title_count1">
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -44,7 +41,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form id="quickForm" action="{{ route('storeService') }}" method="POST" enctype="multipart/form-data"
+                        <form id="quickForm" action="{{ route('storeInvestAdvisory') }}" method="POST" enctype="multipart/form-data"
                             onsubmit="return validateForm()">
                             @csrf
                             <div class="card-body">
@@ -61,18 +58,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Service Category</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name='category'>
-                                      <option value = "">Choose a value</option>
-                                      @foreach($service_categories as $service_category )
-                                    <option value="{{ $service_category->id }}">{{ $service_category->category }}</option>
-                                        @endforeach
-                                    </select>
-                                  </div>
-
-                                <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Description</label>
-                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="10"></textarea>
                                 </div>
 
                                 <input type="submit" class="btn btn-primary" value="Submit">
@@ -99,7 +86,7 @@
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{ $asset->title }}</td>
                                 <td>{{ $asset->description }}</td>
-                                <td><a href="{{route('removeService',['id' => encrypt($asset->id)])}}"><button class="btn btn-primary">Delete</button></a></td>
+                                <td><a href="{{route('removeCommercial',['id' => encrypt($asset->id)])}}"><button class="btn btn-primary">Delete</button></a></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -107,8 +94,8 @@
 
                     </div>
                 </div>
-            </div>
-        </div> --}}
+            </div> --}}
+        </div>
     </section>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 

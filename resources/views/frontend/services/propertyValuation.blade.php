@@ -9,138 +9,72 @@
         </div>
     </div>
 </section>
-<!--Property-Management-section-->
-<section class="property-mangement">
-    <div class="container">
-        <div class="property-mangement-inner">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="property-mangement-left">
-                        <div class="property-mangement-left-inner">
-                            <h2>Understanding the purpose and function of the valuation</h2>
-                            <p>
-                                We provide you with a comprehensive understanding of the market value of your property as well as aiding with price negotiations if you are looking to sell your property <br />
-                                Our work is centered around a professional level of service delivered through our trained and qualified team, and via specialist sub-contracted suppliers if required. From a systematic upkeep of your
-                                property to maximizing on revenue, the specialist REAL
-                            </p>
+@foreach($services as $key => $service)
+        @if ($key % 2 == 0)
+        <section class="property-mangement">
+            <div class="container">
+                <div class="property-mangement-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="property-mangement-left">
+                                <div class="property-mangement-left-inner">
+                                    <h2>{{ $service->title }}</h2>
+                                    <p>
+                                        {{ $service->description }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="property-mangement-right">
-                        <div class="property-mangement-right-inner">
-                            <figure class="property-main">
-                                <img src="images/worth-one.png" />
-                            </figure>
-                            <figure class="property-dot-shape">
-                                <img src="images/property-shape.png" />
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--Financial-Management-section-->
-<section class="financial-mangement">
-    <div class="container">
-        <div class="financial-mangement-inner">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="financial-mangement-right">
-                        <div class="financial-mangement-right-inner">
-                            <figure class="facility-main">
-                                <img src="images/worth-two.png" />
-                            </figure>
-                            <figure class="financial-dot-shape">
-                                <img src="images/property-shape.png" />
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="financial-mangement-left">
-                        <div class="financial-mangement-left-inner">
-                            <h2>Verifying relevant property documents</h2>
-                            <p>
-                                All relevant documents of the property, including the building plans and survey maps, or any other important documents that you may have, should be verified by professional valuators before starting
-                                the valuation process of your property.Our work is centered around a professional level of service delivered through our trained and qualified team, and via specialist sub-contracted suppliers if
-                                required. From a systematic upkeep of your property to maximizing on revenue, the specialist REAL
-                            </p>
+                        <div class="col-md-6">
+                            <div class="property-mangement-right">
+                                <div class="property-mangement-right-inner">
+                                    <figure class="property-main">
+                                        <img src="{{ asset('storage/' . $service->image) }}" />
+                                    </figure>
+                                    <figure class="property-dot-shape">
+                                        <img src="{{ asset('images/property-shape.png') }}" />
+                                    </figure>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!--Property-Management-section-->
-<section class="property-mangement">
-    <div class="container">
-        <div class="property-mangement-inner">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="property-mangement-left">
-                        <div class="property-mangement-left-inner">
-                            <h2>Inspecting the property by professional valuators</h2>
-                            <p>
-                                Professional appraisers will conduct an on-site inspection of the property to be evaluated. There could be multiple visits to the property, with the appraisers looking at different factors. The
-                                findings will be documented to prepare a detailed report. Our work is centered around a professional level of service delivered through our trained and qualified team, and via specialist
-                                sub-contracted suppliers if required. From a systematic upkeep of your property to maximizing on revenue, the specialist REAL
-                            </p>
+        </section>
+        @elseif($key % 2 != 0)
+        <section class="financial-mangement">
+            <div class="container">
+                <div class="financial-mangement-inner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="financial-mangement-right">
+                                <div class="financial-mangement-right-inner">
+                                    <figure class="facility-main">
+                                        <img src="{{ asset('storage/' . $service->image) }}" />
+                                    </figure>
+                                    <figure class="financial-dot-shape">
+                                        <img src="{{ asset('images/property-shape.png') }}" />
+                                    </figure>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="property-mangement-right">
-                        <div class="property-mangement-right-inner">
-                            <figure class="property-main">
-                                <img src="images/worth-three.png" />
-                            </figure>
-                            <figure class="property-dot-shape">
-                                <img src="images/property-shape.png" />
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--Financial-Management-section-->
-<section class="financial-mangement">
-    <div class="container">
-        <div class="financial-mangement-inner">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="financial-mangement-right">
-                        <div class="financial-mangement-right-inner">
-                            <figure class="facility-main">
-                                <img src="images/worth-four.png" />
-                            </figure>
-                            <figure class="financial-dot-shape">
-                                <img src="images/property-shape.png" />
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="financial-mangement-left">
-                        <div class="financial-mangement-left-inner">
-                            <h2>Analysing the data collected from the property</h2>
-                            <p>
-                                The expert appraiser collects as much data as possible by inspecting the property and communicating to the owner or contact person. After careful analyses and computation, the professionals calculate
-                                the value of the property transparently. Our work is centered around a professional level of service delivered through our trained and qualified team, and via specialist sub-contracted suppliers if
-                                required. From a systematic upkeep of your property to maximizing on revenue, the specialist REAL
-                            </p>
+                        <div class="col-md-6">
+                            <div class="financial-mangement-left">
+                                <div class="financial-mangement-left-inner">
+                                    <h2>{{ $service->title }}</h2>
+                                    <p>
+                                        {{ $service->description }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+        @endif
+        @endforeach
+
 <!--Comprehensive-Services-section-->
 <section class="comprehensive-services beyond-bg-white">
     <div class="container">

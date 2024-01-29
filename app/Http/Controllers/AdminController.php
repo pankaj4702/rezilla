@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service,Testimonial};
+use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service,Testimonial,ServiceCategory};
 use DB;
 use Hash;
 use Session;
@@ -312,14 +312,17 @@ class AdminController extends Controller
 
         public function getService(){
             $assets = Service::where('status', 1)->get();
-            return view('admin.services.Services',compact('assets'));
+            $service_categories = ServiceCategory::get();
+            return view('admin.services.Services',compact('assets','service_categories'));
         }
 
         public function storeService(Request $request){
+
             $request->validate([
                 'title' => [
-                    'required','string','max:50',
+                    'required','string','max:150',
                 ],
+                'category'=>'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description'=>'required',
             ]);
@@ -330,6 +333,7 @@ class AdminController extends Controller
                 'title'=>$request->title,
                 'description'=> $request->description,
                 'image'=>$asset_image,
+                'category'=>$request->category,
                 'status'=>1,
             ]);
             if($assets){
@@ -372,6 +376,16 @@ class AdminController extends Controller
             if($testimonial){
                 return redirect()->back();
             }
+        }
+
+        public function investmentAdvisory(){
+            return view('admin.services.investAdvisory');
+        }
+
+        public function allServices(){
+            $services = Service::join('service_categories','services.category','service_categories.id')->select('services.title','services.description','service_categories.category')->get();
+
+            return view('admin.services.allServices',compact('services'));
         }
 
 }

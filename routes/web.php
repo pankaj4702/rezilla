@@ -40,21 +40,13 @@ Route::prefix('/admin')->group(function () {
 });
 
 Route::prefix('/admin/service')->group(function () {
-    Route::get('/asset-management',[AdminController::class,'getAssetManagement'])->name('getAssetManagement');
-    Route::post('/store-asset-management',[AdminController::class,'storeAsset'])->name('storeAsset');
-    Route::get('/asset-delete/{id}',[AdminController::class,'removeAsset'])->name('removeAsset');
-
-    Route::get('/commercial',[AdminController::class,'getAssetCommercial'])->name('getAssetCommercial');
-    Route::post('/store-commercial',[AdminController::class,'storeCommercial'])->name('storeCommercial');
-    Route::get('/comm-delete/{id}',[AdminController::class,'removeCommercial'])->name('removeCommercial');
-
-    Route::get('/holiday-homes',[AdminController::class,'getHolidayHomes'])->name('getHolidayHomesService');
-    Route::post('/store-holidayhome',[AdminController::class,'storeHolidayHomesService'])->name('storeHolidayHomesService');
-    Route::get('/holi-homes-delete/{id}',[AdminController::class,'removeHolidayHomesService'])->name('removeHolidayHomesService');
 
     Route::get('/comprehensive-service',[AdminController::class,'getService'])->name('getService');
     Route::post('/store-comprehensive-service',[AdminController::class,'storeService'])->name('storeService');
+    Route::get('/services',[AdminController::class,'allServices'])->name('allServices');
     Route::get('/service-delete/{id}',[AdminController::class,'removeService'])->name('removeService');
+
+
 });
 
 
@@ -95,9 +87,9 @@ Route::prefix('/services')->group(function () {
 Route::get('/asset-management',[ServiceController::class,'getAsset'])->name('getAsset');
 Route::get('/holiday-homes',[ServiceController::class,'getHolidayHomes'])->name('getHolidayHomes');
 Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
-Route::get('/investment-advisory',[HomeController::class,'investAdvisory'])->name('investAdvisory');
-Route::get('/conveyance',[HomeController::class,'conveyance'])->name('conveyance');
-Route::get('/property-valuation',[HomeController::class,'valuation'])->name('valuation');
+Route::get('/investment-advisory',[ServiceController::class,'investAdvisory'])->name('investAdvisory');
+Route::get('/conveyance',[ServiceController::class,'conveyance'])->name('conveyance');
+Route::get('/property-valuation',[ServiceController::class,'valuation'])->name('valuation');
 });
 
 // Events

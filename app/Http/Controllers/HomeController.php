@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber,Testimonial};
+use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber,Testimonial,Service};
 use Session;
 use GuzzleHttp\Client;
 use DB;
@@ -308,15 +308,5 @@ class HomeController extends Controller
         return view('frontend.reviews',compact('testimonials'));
     }
 
-    public function investAdvisory(){
-        return view('frontend.services.InvestAdvisory');
-    }
 
-    public function conveyance(){
-        return view('frontend.services.conveyance');
-    }
-
-    public function valuation(){
-        return view('frontend.services.propertyValuation');
-    }
 }

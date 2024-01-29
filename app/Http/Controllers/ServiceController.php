@@ -9,20 +9,41 @@ use App\Models\{AssetManagement,Commercial,Holiday_Homes,Service};
 class ServiceController extends Controller
 {
     public function getAsset(){
-        $assets = AssetManagement::where('status',1)->get();
-        $services = Service::where('status',1)->get();
+        $assets =  Service::where('category', 1)
+        ->get();
+        $services =$services = Service::where('category', 7)->get();
       return view('frontend.services.asset',compact('assets','services'));
     }
 
     public function getHolidayHomes(){
-        $assets = Holiday_Homes::where('status',1)->get();
-        $services = Service::where('status',1)->get();
+        $assets = Service::where('category', 2)
+        ->get();
+        $services = Service::where('category',7)->get();
         return view('frontend.services.holidayHomes',compact('assets','services'));
     }
 
     public function getCommercial(){
-               $assets = Commercial::where('status',1)->get();
+               $assets = service::where('category', 3)
+               ->get();
         return view('frontend.services.commercial',compact('assets'));
+    }
+
+    public function investAdvisory(){
+        $services = Service::where('category', 4)
+        ->get();
+        return view('frontend.services.InvestAdvisory',compact('services'));
+    }
+
+    public function conveyance(){
+        $services = Service::where('category', 5)
+        ->get();
+        return view('frontend.services.conveyance',compact('services'));
+    }
+
+    public function valuation(){
+        $services = Service::where('category', 6)
+        ->get();
+        return view('frontend.services.propertyValuation',compact('services'));
     }
 
 

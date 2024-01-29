@@ -44,15 +44,15 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('addProject') }}" class="nav-link {{ request()->is('admin/add-project') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Add Projects
-                {{-- <span class="right badge badge-danger">New</span> --}}
+                <span class="right badge badge-danger">New</span>
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('property') }}" class="nav-link {{ request()->is('admin/properties') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
@@ -71,41 +71,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>
-                       Services
-                        <i class="right fas fa-angle-left"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="{{ route('getAssetManagement') }}" class="nav-link {{ request()->is('admin/add-asset-management') ? 'active' : '' }}">
-                            <i class="fas fa-tasks nav-icon"></i>
-                          <p> Asset Management</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{{ route('getHolidayHomesService') }}" class="nav-link">
-                          <i class="fas fa-igloo nav-icon"></i>
-                          <p>Holiday Homes</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{{ route('getAssetCommercial') }}" class="nav-link">
-                          <i class="fas fa-warehouse nav-icon"></i>
-                          <p>Commercial</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{{ route('getService') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Services</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+
               <li class="nav-item">
                 <a href="{{route('property_attribute')}}" class="nav-link {{ request()->is('admin/add-property-attributes') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -134,6 +100,24 @@
                 <a href="{{route('addTestimonial')}}"  class="nav-link {{ request()->is('admin/add-city') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Testimonial </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Add Services
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{ route('getService') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Services</p>
                 </a>
               </li>
             </ul>

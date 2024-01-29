@@ -11,6 +11,8 @@
             </div>
         </section>
         <!--Property-Management-section-->
+        @foreach($services as $key => $service)
+        @if ($key % 2 == 0)
         <section class="property-mangement">
             <div class="container">
                 <div class="property-mangement-inner">
@@ -18,13 +20,9 @@
                         <div class="col-md-6">
                             <div class="property-mangement-left">
                                 <div class="property-mangement-left-inner">
-                                    <h2>Venture Into the World of Investments</h2>
+                                    <h2>{{ $service->title }}</h2>
                                     <p>
-                                        D&B Investments & Advisory is an integrated division under D&B Properties and Bayari Investments, offering investors and high-net-worth individuals (HNWI’s) in Dubai opportunities to enter new markets
-                                        with confidence and connecting them with the most lucrative investment funds and business stake. Using cutting-edge research and data analysis, investors are advised by RERA-licensed professionals
-                                        every step of the way in making informed decisions based on current trends in real estate performance.<br />
-                                        Backed by a multitude of senior-level industry experts along with a commitment to excellence, D&B Investments & Advisory is the premier choice for real estate and business investments in Dubai. We
-                                        provide our clients with access to exclusive real estate and business projects, priceless knowledge of the market, and a commitment to maximizing financial profitability on all investments.
+                                        {{ $service->description }}
                                     </p>
                                 </div>
                             </div>
@@ -33,10 +31,10 @@
                             <div class="property-mangement-right">
                                 <div class="property-mangement-right-inner">
                                     <figure class="property-main">
-                                        <img src="images/investments-one.png" />
+                                        <img src="{{ asset('storage/' . $service->image) }}" />
                                     </figure>
                                     <figure class="property-dot-shape">
-                                        <img src="images/property-shape.png" />
+                                        <img src="{{ asset('images/property-shape.png') }}" />
                                     </figure>
                                 </div>
                             </div>
@@ -45,7 +43,7 @@
                 </div>
             </div>
         </section>
-        <!--Financial-Management-section-->
+        @elseif($key % 2 != 0)
         <section class="financial-mangement">
             <div class="container">
                 <div class="financial-mangement-inner">
@@ -54,10 +52,10 @@
                             <div class="financial-mangement-right">
                                 <div class="financial-mangement-right-inner">
                                     <figure class="facility-main">
-                                        <img src="images/investments-two.png" />
+                                        <img src="{{ asset('storage/' . $service->image) }}" />
                                     </figure>
                                     <figure class="financial-dot-shape">
-                                        <img src="images/property-shape.png" />
+                                        <img src="{{ asset('images/property-shape.png') }}" />
                                     </figure>
                                 </div>
                             </div>
@@ -65,93 +63,10 @@
                         <div class="col-md-6">
                             <div class="financial-mangement-left">
                                 <div class="financial-mangement-left-inner">
-                                    <h2>Booming Sectors & Projects for Investment</h2>
-                                    <ul class="investments-service">
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Residential & Commercial Bulk Units
-                                        </li>
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Industries & Factories
-                                        </li>
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Businesses & Equities for Sale
-                                        </li>
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Joint Ventures
-                                        </li>
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Hospitality & Healthcare
-                                        </li>
-                                        <li>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.3145 3.31425C8.52008 2.58865 4.04008 5.89086 3.31448 10.6853C2.58888 15.4797 5.89109 19.9597 10.6855 20.6853C15.4799 21.4109 19.9599 18.1086 20.6855 13.3142"
-                                                    stroke="#F26C61"
-                                                    stroke-width="1.5"
-                                                    stroke-miterlimit="10"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path d="M6.63071 11.1616L10.6839 15.0436L18.4525 6.92787" stroke="#F26C61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                            Education
-                                        </li>
-                                    </ul>
+                                    <h2>{{ $service->title }}</h2>
+                                    <p>
+                                        {{ $service->description }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -159,6 +74,10 @@
                 </div>
             </div>
         </section>
+        @endif
+        @endforeach
+        <!--Financial-Management-section-->
+
         <!--Asset-Accordion-section-->
         <section class="asset-faq">
             <div class="container">
