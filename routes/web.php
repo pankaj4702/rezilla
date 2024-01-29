@@ -35,6 +35,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/add-asset-management',[AdminController::class,'getAssetManagement'])->name('getAssetManagement');
     Route::post('/store-asset-management',[AdminController::class,'storeAsset'])->name('storeAsset');
     Route::get('/asset-delete/{id}',[AdminController::class,'removeAsset'])->name('removeAsset');
+    Route::get('/testimonial',[AdminController::class,'addTestimonial'])->name('addTestimonial');
+    Route::post('/store-testimonial',[AdminController::class,'storeTestimonial'])->name('storeTestimonial');
 });
 
 Route::prefix('/admin/service')->group(function () {
@@ -93,6 +95,9 @@ Route::prefix('/services')->group(function () {
 Route::get('/asset-management',[ServiceController::class,'getAsset'])->name('getAsset');
 Route::get('/holiday-homes',[ServiceController::class,'getHolidayHomes'])->name('getHolidayHomes');
 Route::get('/commercial',[ServiceController::class,'getCommercial'])->name('getCommercial');
+Route::get('/investment-advisory',[HomeController::class,'investAdvisory'])->name('investAdvisory');
+Route::get('/conveyance',[HomeController::class,'conveyance'])->name('conveyance');
+Route::get('/property-valuation',[HomeController::class,'valuation'])->name('valuation');
 });
 
 // Events
@@ -111,3 +116,9 @@ Route::get('/prod-list',[PaymentController::class,'getProductList'])->name('getP
 Route::get('/prod-delete',[PaymentController::class,'deleteProduct'])->name('deleteProduct');
 Route::get('/get-firstPlan',[PaymentController::class,'firstPlan'])->name('firstPlan');
 Route::get('/payment_store',[PaymentController::class,'payment_store'])->name('payment_store');
+
+// reviews
+Route::get('/client-reviews',[HomeController::class,'reviews'])->name('reviews');
+
+
+

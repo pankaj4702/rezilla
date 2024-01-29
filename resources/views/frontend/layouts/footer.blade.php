@@ -11,7 +11,7 @@
                             <li><a href="javascript::">CEO Message</a></li>
                             <li><a href="javascript::">Corporate Team</a></li>
                             <li><a href="javascript::">Real Estate Agents</a></li>
-                            <li><a href="javascript::">Client Reviews</a></li>
+                            <li><a href="{{ route('reviews') }}">Client Reviews</a></li>
                         </ul>
                     </div>
                 </div>
@@ -19,12 +19,12 @@
                     <div class="footer-inner-content">
                         <h2>Services</h2>
                         <ul class="footer-menu">
-                            <li><a href="javascript::">Asset Management</a></li>
-                            <li><a href="javascript::">Holiday Homes</a></li>
-                            <li><a href="javascript::">Commercial</a></li>
-                            <li><a href="javascript::">Investments & Advisory</a></li>
-                            <li><a href="javascript::">Conveyance</a></li>
-                            <li><a href="javascript::">Property Valuation</a></li>
+                            <li><a href="{{ route('getAsset') }}">Asset Management</a></li>
+                            <li><a href="{{ route('getHolidayHomes') }}">Holiday Homes</a></li>
+                            <li><a href="{{ route('getCommercial') }}">Commercial</a></li>
+                            <li><a href="{{ route('investAdvisory') }}">Investments & Advisory</a></li>
+                            <li><a href="{{ route('conveyance') }}">Conveyance</a></li>
+                            <li><a href="{{ route('valuation') }}">Property Valuation</a></li>
                         </ul>
                     </div>
                 </div>

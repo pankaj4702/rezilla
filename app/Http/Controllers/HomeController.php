@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber};
+use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber,Testimonial};
 use Session;
 use GuzzleHttp\Client;
 use DB;
@@ -12,8 +12,20 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        $projects = Project::all();
-      return view('frontend.home',compact('projects'));
+        $projects = Property::orderBy('id', 'desc')
+        ->take(6)
+        ->get();
+        $projects->each(function ($project) {
+            $configurations = json_decode($project->configuration);
+            $configArray = (array) $configurations;
+            $project->configuration = $configArray;
+    });
+        $projects->each(function ($project) {
+            $project->images = explode(',', $project->images);
+        });
+
+        $testimonials = Testimonial::take(5)->get();
+      return view('frontend.home',compact('projects','testimonials'));
     }
 
     public function sell_property(){
@@ -28,7 +40,6 @@ class HomeController extends Controller
             });
             $groupedConfigurations = $result->groupBy('typeId');
             $configurations = $groupedConfigurations->map->first();
-            // dd($configurations);
         $property_types =Property_Type::all();
         $bedrooms =Bedroom::all();
         $property_status =Property_status::all();
@@ -38,11 +49,12 @@ class HomeController extends Controller
 
         // check the subscriber
         $user_id = Session::get('user_id');
+        $get_property = Property::where('user_id', $user_id)->get();
+        $property_count = $get_property->count();
         $subscriber = Subscriber::where('user_id',$user_id)->first();
-
         if (Session::has('user_id')) {
 
-            return view('frontend.sell_property',compact('property_types','bedrooms','property_status','property_sources','configurations','post_users','subscriber'));
+            return view('frontend.sell_property',compact('property_types','bedrooms','property_status','property_sources','configurations','post_users','property_count','subscriber'));
         }
         else{
             return redirect()->route('loginpage');
@@ -68,8 +80,11 @@ class HomeController extends Controller
         ]);
 
         $user_id = Session::get('user_id');
+        $get_property = Property::where('user_id', $user_id)->get();
+        $property_count = $get_property->count();
         $subscriber = Subscriber::where('user_id',$user_id)->first();
-          if($subscriber == null){
+
+          if($property_count > 0 && $subscriber == null){
             return response()->json(['status'=> 0,'error'=>'something went wrong']);
           }
 
@@ -152,7 +167,8 @@ class HomeController extends Controller
 
     public function propertyDetail($id){
         $pro_id = decrypt($id);
-        $property = Property::join('property__types', 'properties.property_type', '=', 'property__types.id')
+        $property = Property::
+        join('property__types', 'properties.property_type', '=', 'property__types.id')
         ->join('property_sources', 'properties.property_source', '=', 'property_sources.id')
         ->join('property_status', 'properties.property_status', '=', 'property_status.id')
         ->join('users','properties.user_id','users.id')
@@ -284,7 +300,23 @@ class HomeController extends Controller
             ->get()->toArray();
             $configArray = array_merge($configArray, $configurationData);
          }
-        //  dd($configArray);
          return response()->json($configArray);
+    }
+
+    public function reviews(){
+        $testimonials = Testimonial::get();
+        return view('frontend.reviews',compact('testimonials'));
+    }
+
+    public function investAdvisory(){
+        return view('frontend.services.InvestAdvisory');
+    }
+
+    public function conveyance(){
+        return view('frontend.services.conveyance');
+    }
+
+    public function valuation(){
+        return view('frontend.services.propertyValuation');
     }
 }

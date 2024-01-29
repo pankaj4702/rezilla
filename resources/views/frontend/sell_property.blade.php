@@ -24,13 +24,10 @@
         display: flex;
         gap: 170px;
     }
-    .package-div{
-
-    }
 </style>
 
 <!-- Button trigger modal -->
-@if($subscriber == null)
+@if($property_count > 0 && $subscriber == null)
 <button type="button" class="btn btn-primary d-none" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Subscription
   </button>
@@ -43,7 +40,7 @@
         <div class="modal-header">
             <div>
           <h1 class="modal-title fs-5" id="exampleModalLabel">Subscription</h1>
-          <P style="font-size: 12px;">Add the first property for <b>Free</b> and choose a subscription !</P>
+          <P style="font-size: 12px;">Add the first property for <b>Free</b> and then choose a <b>plan</b> !</P>
             </div>
            <button type="button" id="clsbtn" class="btn btn-secondary" data-bs-dismiss="modal"> <span aria-hidden="true">&times;</span></button>
         </div>
@@ -682,11 +679,31 @@
                 contentType: false,
                 success: function(data) {
                     if (data.status == 1) {
-                        window.location.reload();
-                    }
+                        Swal.fire({
+                            title: 'Property Submitted Successful.',
+                            icon: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#F26C61',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                                 }
+                                });
+                     }
+
                     else if(data.status == 0){
-                        alert('Please, check subscription plans first !');
-                        window.location.reload();
+                        Swal.fire({
+                            title: 'Please, Check subscription plans first !',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            showConfirmButton: false,
+                            cancelButtonColor: '#e76363',
+                        }).then((result) => {
+                            if (result.dismiss) {
+                                window.location.reload();
+                                 }
+                                });
                     }
 
                     else {
@@ -724,11 +741,30 @@
                 contentType: false,
                 success: function(data) {
                     if (data.status == 1) {
-                        window.location.reload();
+                        Swal.fire({
+                            title: 'Property Submitted Successful.',
+                            icon: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#F26C61',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                                 }
+                                });
                     }
                     else if(data.status == 0){
-                        alert('Please, check subscription plans first !');
-                        window.location.reload();
+                        Swal.fire({
+                            title: 'Please, Check subscription plans first !',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            showConfirmButton: false,
+                            cancelButtonColor: '#e76363',
+                        }).then((result) => {
+                            if (result.dismiss) {
+                                window.location.reload();
+                                 }
+                                });
                     }
 
                 },

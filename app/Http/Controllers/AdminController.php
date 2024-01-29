@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service};
+use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service,Testimonial};
 use DB;
 use Hash;
 use Session;
@@ -201,6 +201,7 @@ class AdminController extends Controller
         }
 
         public function storeAsset(Request $request){
+
             $request->validate([
                 'title' => [
                     'required','string','max:30',
@@ -208,6 +209,7 @@ class AdminController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description'=>'required',
             ]);
+
             $image = $request->file('image');
             $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
             $asset_image = $image->storeAs('uploads', $tempName, 'public');
@@ -342,6 +344,32 @@ class AdminController extends Controller
                 $asset->status = 0;
                 // Save the changes
                 $asset->save();
+                return redirect()->back();
+            }
+        }
+
+        public function addTestimonial(){
+           return view('admin.testimonial');
+        }
+
+        public function storeTestimonial(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:30',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $testimonial = Testimonial::create([
+                'name'=>$request->title,
+                'message'=> $request->description,
+                'image'=>$asset_image,
+                'status'=>0,
+            ]);
+            if($testimonial){
                 return redirect()->back();
             }
         }

@@ -504,6 +504,8 @@
     </div>
 </section>
 <!--Project-section-->
+@if(isset($projects))
+{{-- @dd($projects) --}}
 <section class="project">
     <div class="container">
         <div class="project-inner">
@@ -513,11 +515,11 @@
                     <h2>Hot Selling Projects in India</h2>
                     <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, nec dignissim purus.</p>
                 </div>
-                <div class="project-inner-head-right">
+                {{-- <div class="project-inner-head-right">
                     <button type="button" class="project-head-btn">All</button>
                     <button type="button" class="project-head-btn active">Buy</button>
                     <button type="button" class="project-head-btn">Rent</button>
-                </div>
+                </div> --}}
             </div>
             <div class="project-slider">
                 <div class="project-slider-inner">
@@ -527,27 +529,26 @@
                                 <div class="project-slider-wapper">
                                     <div class="project-slider-wapper-head">
                                         <figure>
-                                            <img src="{{ asset('storage/' . $project->image) }}" />
+                                            <a href="{{ route('propertyDetail',['id'=>encrypt($project->id)]) }}">
+                                                <img src="{{ asset('storage/' . $project->images[0]) }}" /></a>
                                         </figure>
-                                        {{-- <div class="project-slider-wapper-status">
-                                            <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <div class="project-slider-wapper-status new-listing">
+                                            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
-                                                    d="M12.4076 11.2528C12.6672 10.8265 12.9355 10.3857 13.2006 9.93118C14.0877 8.41044 14.2505 6.87814 13.6846 5.37676C12.5427 2.34747 8.72575 0.501751 7.84209 0.207261L7.22073 0L6.25093 1.93998L6.71893 2.32231C6.72417 2.32651 7.244 2.78073 7.27865 3.4693C7.30824 4.0571 6.986 4.69229 6.32112 5.35736C5.8594 5.81904 5.35264 6.26547 4.8161 6.73805C2.55865 8.72608 0 10.98 0 15.2439C0 15.3024 0.000550676 15.3607 0.00165204 15.4185C0.0180119 16.3595 0.2201 17.2879 0.596308 18.1505C0.972516 19.0131 1.51543 19.7928 2.19387 20.445C3.55621 21.7701 5.38285 22.5097 7.28332 22.5056H11.6306L11.0939 21.4166C8.91356 16.9914 10.4555 14.459 12.4076 11.2528Z"
-                                                    fill="#FF1111"
-                                                />
-                                                <path
-                                                    d="M19.8227 15.1957C19.8102 15.1458 19.797 15.0957 19.7834 15.0454C19.2384 13.0473 16.2217 10.4781 15.8795 10.1917L15.1924 9.6167L14.7418 10.3912C13.7151 12.1565 12.8339 13.7666 12.4498 15.5933C12.0118 17.6765 12.3066 19.7937 13.3513 22.0661L13.5534 22.5058H14.0669C14.9712 22.5084 15.8641 22.3034 16.6767 21.9065C17.4894 21.5096 18.2 20.9314 18.754 20.2166C19.3045 19.5173 19.6872 18.701 19.8725 17.8305C20.0578 16.96 20.0408 16.0586 19.8227 15.1957Z"
-                                                    fill="#FF1111"
+                                                    d="M19.5387 8.55713L10.6731 0.400829C10.3849 0.135674 10.0054 -0.00782393 9.61384 0.000329345C9.2223 0.00848263 8.84906 0.167656 8.57214 0.444579L0.418438 8.59833L0 9.01672V21.037H7.85714V13.537H12.1429V21.037H20V8.98159L19.5387 8.55713Z"
+                                                    fill="#119BFF"
                                                 />
                                             </svg>
-                                            Popular
-                                        </div> --}}
+                                            New Listing
+                                        </div>
                                     </div>
                                     <div class="project-slider-wapper-bottom">
                                         <h3>${{ $project->price }}</h3>
-                                        <h4>{{ $project->project_name }}</h4>
-                                        <p>1{{ $project->address }}</p>
+                                        <h4>{{ $project->porperty_name }}</h4>
+                                        <p>{{ $project->property_location }}</p>
                                         <div class="project-facility">
+                                            @if($project->configuration != null)
+                                            @if(isset($project->configuration['Bedroom']))
                                             <div class="project-beds">
                                                 <svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -555,8 +556,10 @@
                                                         fill="#2B2B2B"
                                                     />
                                                 </svg>
-                                                {{ $project->bed }} Beds
+                                                {{ $project->configuration['Bedroom'] }} Beds
                                             </div>
+                                            @endif
+                                            @if(isset($project->configuration['Bathroom']))
                                             <div class="project-beds">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -564,8 +567,10 @@
                                                         fill="#2B2B2B"
                                                     />
                                                 </svg>
-                                                {{ $project->bath }} Bath
+                                                {{ $project->configuration['Bathroom']  }} Bath
                                             </div>
+                                            @endif
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -711,6 +716,7 @@
         </div>
     </div>
 </section>
+@endif
 <!--Properties-section-->
 <section class="properties">
     <div class="container">
@@ -722,6 +728,7 @@
             <div class="properties-inner-bottom">
                 <div class="row">
                     <div class="col-md-4 p-0">
+                        <a href="{{ route('getAsset') }}">
                         <div class="properties-bottom-content">
                             <span class="properties-icon">
                                 <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -736,9 +743,11 @@
                             <h4>Asset Management</h4>
                             <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, nec dignissim purus.</p>
                         </div>
+                        </a>
                     </div>
 
                     <div class="col-md-4 p-0">
+                        <a href="{{ route('getCommercial') }}   ">
                         <div class="properties-bottom-content">
                             <span class="properties-icon">
                                 <svg width="42" height="44" viewBox="0 0 42 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -753,9 +762,11 @@
                             <h4>Commercial</h4>
                             <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, nec dignissim purus.</p>
                         </div>
+                        </a>
                     </div>
 
                     <div class="col-md-4 p-0">
+                        <a href="{{ route('getHolidayHomes') }}">
                         <div class="properties-bottom-content">
                             <span class="properties-icon">
                                 <svg width="48" height="35" viewBox="0 0 48 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -768,6 +779,7 @@
                             <h4>Holiday Homes</h4>
                             <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, nec dignissim purus.</p>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -888,6 +900,7 @@
     </div>
 </section>
 <!--Testimonials-section-->
+@if(isset($testimonials))
 <section class="testimonials">
     <div class="container">
         <div class="testimonials-inner">
@@ -900,10 +913,12 @@
             </div>
 
             <div class="owl-carousel testimonials-slider owl-theme">
+
+                @foreach($testimonials as $testimonial)
                 <div class="item">
                     <div class="testimonials-slider-inner">
                         <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
+                            <p>{{ $testimonial->message }}</p>
                             <div class="testimonials-content-shape">
                                 <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M32 0L15 30L0 0H32Z" fill="white" />
@@ -912,288 +927,18 @@
                         </div>
                         <div class="testimonials-slider-wapper">
                             <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
+                                <img src="{{ asset('storage/' . $testimonial->image) }}" style="border-radius: 30px;" />
                             </figure>
                             <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
+                                <h5>{{ $testimonial->name }}</h5>
                                 <p>Customer</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I received very good care at Clinicity Clinic, and the doctor took the time to explain the medications he was prescribing and why.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-two.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Connor Walker</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I have insurance and still go to this clinic. The cost is in line with my copy to do and I don’t need to make an appointment.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-three.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Kira Wood</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I received very good care at Clinicity Clinic, and the doctor took the time to explain the medications he was prescribing and why.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-two.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Connor Walker</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I have insurance and still go to this clinic. The cost is in line with my copy to do and I don’t need to make an appointment.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-three.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Kira Wood</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I received very good care at Clinicity Clinic, and the doctor took the time to explain the medications he was prescribing and why.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-two.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Connor Walker</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I have insurance and still go to this clinic. The cost is in line with my copy to do and I don’t need to make an appointment.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-three.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Kira Wood</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I received very good care at Clinicity Clinic, and the doctor took the time to explain the medications he was prescribing and why.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-two.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Connor Walker</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I have insurance and still go to this clinic. The cost is in line with my copy to do and I don’t need to make an appointment.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-three.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Kira Wood</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonials-slider-inner">
-                        <div class="testimonials-slider-content">
-                            <p>I could probably go into sales for you. I am completely blown away. After using SEO my business skyrocketed! The very best.</p>
-                            <div class="testimonials-content-shape">
-                                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M32 0L15 30L0 0H32Z" fill="white" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="testimonials-slider-wapper">
-                            <figure class="testimonials-user">
-                                <img src="{{ asset('images/user-one.png') }}" />
-                            </figure>
-                            <div class="testimonials-user-detail">
-                                <h5>Grace Hall</h5>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
             </div>
              <figure class="testimonials-shape-bottom">
                     <img src="{{ asset('images/quote-up.png') }}">
@@ -1201,6 +946,7 @@
         </div>
     </div>
 </section>
+@endif
 
 @endsection
 
