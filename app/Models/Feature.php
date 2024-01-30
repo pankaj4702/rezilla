@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commercial extends Model
+class Feature extends Model
 {
     use HasFactory;
-    
     protected $fillable = [
         'title',
         'description',
+        'community',
         'image',
         'status',
     ];

@@ -1637,7 +1637,7 @@ footer {
     row-gap: 60px;
 }
 .comprehensive-services-bottom-inner {
-    padding: 38px 15px 11px;
+    padding: 25px 15px 25px;
     display: flex;
     column-gap: 18px;
     align-items: center;
@@ -4533,6 +4533,32 @@ span.ar-apl-btn {
     margin-top: -8px;
     display: inline-block;
     font-size: 12px;
+}
+.view-all-banner {
+    background: url(../images/dubai-bg.png);
+}
+.view-all-img figure {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}
+.community-img{
+    max-width: 140%;
+    border-radius: 65px;
+}
+.comm-image{ position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+
+}
+.coman-img img {
+    width: 100%;
+    padding: 0px;
+    height: 620px;
+    position: relative;
 }
 
 

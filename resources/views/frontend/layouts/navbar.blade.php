@@ -51,6 +51,10 @@
                         <li><a class="dropdown-item" href="#">View All</a></li>
                     </ul>
                 </li>
+                    @php
+                        $communities = App\Models\Community::take(3)->get();
+                    @endphp
+                @if(isset($communities))
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Communities
@@ -66,15 +70,13 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Dubai Marina</a></li>
-                        <li><a class="dropdown-item" href="#">Downtown Dubai</a></li>
-                        <li><a class="dropdown-item" href="#">Palm Jumeirah</a></li>
-                        <li><a class="dropdown-item" href="#">Dubai Land</a></li>
-                        <li><a class="dropdown-item" href="#">City Walk Dubai</a></li>
-                        <li><a class="dropdown-item" href="#">DIFC</a></li>
-                        <li><a class="dropdown-item" href="#">View All</a></li>
+                        @foreach($communities as $community)
+                        <li><a class="dropdown-item" href="{{ route('commProperty',['id'=>encrypt($community->id)]) }}">{{ $community->title }}</a></li>
+                        @endforeach
+                        <li><a class="dropdown-item" href="{{ route('communities') }}">View All</a></li>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Services

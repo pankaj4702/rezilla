@@ -48,8 +48,17 @@ Route::prefix('/admin/service')->group(function () {
 
 
 });
+// communities
+Route::get('/communities',[HomeController::class,'communities'])->name('communities');
+Route::get('/community-place/{id}',[HomeController::class,'commProperty'])->name('commProperty');
 
-
+// admin communities
+Route::prefix('/admin/community')->group(function () {
+    Route::get('/add-community',[AdminController::class,'getCommunity'])->name('getCommunity');
+    Route::post('/store-community',[AdminController::class,'storeCommunity'])->name('storeCommunity');
+    Route::get('/add-feature',[AdminController::class,'getFeature'])->name('getFeature');
+    Route::post('/store-feature',[AdminController::class,'storeFeature'])->name('storeFeature');
+});
 
 // front-end user
 Route::get('/',[HomeController::class,'index'])->name('home');

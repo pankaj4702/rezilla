@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber,Testimonial,Service};
+use App\Models\{Project, Property_source, Property_status, Property_Type, Bedroom, Property,City,PostUser,Subscriber,Testimonial,Service,Community,Feature};
 use Session;
 use GuzzleHttp\Client;
 use DB;
@@ -308,5 +308,15 @@ class HomeController extends Controller
         return view('frontend.reviews',compact('testimonials'));
     }
 
+    public function communities(){
+        $communities = Community::all();
+        return view('frontend.communities',compact('communities'));
+    }
 
+    public function commProperty($id){
+        $comm_id = decrypt($id);
+        $community = Community::find($comm_id);
+        $features = Feature::where('community',$comm_id)->get();
+        return view('frontend.communityPlace',compact('community','features'));
+    }
 }

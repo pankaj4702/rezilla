@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,AssetManagement,Commercial,Holiday_Homes,Service,Testimonial,ServiceCategory};
+use App\Models\{User,Project,Property_Type,Property_source,Property_status,Property,Configuration,City,PostUser,Service,Testimonial,ServiceCategory,Community,Feature};
 use DB;
 use Hash;
 use Session;
@@ -46,7 +46,6 @@ class AdminController extends Controller
     }
 
     public function dashboard(){
-    //    return view('admin.abc');
        return view('admin.admin');
     }
 
@@ -98,35 +97,35 @@ class AdminController extends Controller
     }
 
     public function store_attributes(Request $request){
-        $checkboxValues = $request->input('config', []);
-        $configuration = implode(',',$checkboxValues);
-        $request->validate([
-            'type' => 'max:35',
-            'status' => 'max:35',
-            'source' => 'max:35',
-            'category'=>'required',
-        ]);
-        if(isset($request->type) ){
-          $property_type = Property_Type::create([
-            'name'=>$request->type,
-            'category'=>$request->category,
-            'configuration'=>$configuration,
-          ]);
-        }
-        if(isset($request->source) ){
-          $property_type = Property_source::create([
-            'name'=>$request->source,
-            'category'=>$request->category,
-          ]);
-        }
-        if(isset($request->status) ){
-          $property_type = Property_status::create([
-            'name'=>$request->status,
-            'category'=>$request->category,
-          ]);
-        }
-        return redirect()->back();
-        }
+            $checkboxValues = $request->input('config', []);
+            $configuration = implode(',',$checkboxValues);
+            $request->validate([
+                'type' => 'max:35',
+                'status' => 'max:35',
+                'source' => 'max:35',
+                'category'=>'required',
+            ]);
+            if(isset($request->type) ){
+            $property_type = Property_Type::create([
+                'name'=>$request->type,
+                'category'=>$request->category,
+                'configuration'=>$configuration,
+            ]);
+            }
+            if(isset($request->source) ){
+            $property_type = Property_source::create([
+                'name'=>$request->source,
+                'category'=>$request->category,
+            ]);
+            }
+            if(isset($request->status) ){
+            $property_type = Property_status::create([
+                'name'=>$request->status,
+                'category'=>$request->category,
+            ]);
+            }
+            return redirect()->back();
+    }
 
         public function project_detail($ecryptedId){
             $id = decrypt($ecryptedId);
@@ -191,121 +190,6 @@ class AdminController extends Controller
                 'slug'=> $request->post_user,
             ]);
             if($postuser){
-                return redirect()->back();
-            }
-        }
-
-        public function getAssetManagement(){
-            $assets = AssetManagement::where('status', 1)->get();
-            return view('admin.services.assetManage',compact('assets'));
-        }
-
-        public function storeAsset(Request $request){
-
-            $request->validate([
-                'title' => [
-                    'required','string','max:30',
-                ],
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description'=>'required',
-            ]);
-
-            $image = $request->file('image');
-            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
-            $asset_image = $image->storeAs('uploads', $tempName, 'public');
-            $assets = AssetManagement::create([
-                'title'=>$request->title,
-                'description'=> $request->description,
-                'image'=>$asset_image,
-                'status'=>1,
-            ]);
-            if($assets){
-                return redirect()->back();
-            }
-        }
-
-        public function removeAsset($id){
-            $assetId = decrypt($id);
-            $asset = AssetManagement::find($assetId);
-            if ($asset) {
-                $asset->status = 0;
-                // Save the changes
-                $asset->save();
-                return redirect()->back();
-            }
-        }
-
-        public function getAssetCommercial(){
-            $assets = Commercial::where('status', 1)->get();
-            return view('admin.services.commercial',compact('assets'));
-        }
-
-        public function storeCommercial(Request $request){
-            $request->validate([
-                'title' => [
-                    'required','string','max:30',
-                ],
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description'=>'required',
-            ]);
-            $image = $request->file('image');
-            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
-            $asset_image = $image->storeAs('uploads', $tempName, 'public');
-            $assets = Commercial::create([
-                'title'=>$request->title,
-                'description'=> $request->description,
-                'image'=>$asset_image,
-                'status'=>1,
-            ]);
-            if($assets){
-                return redirect()->back();
-            }
-        }
-
-        public function removeCommercial($id){
-            $assetId = decrypt($id);
-            $asset = Commercial::find($assetId);
-            if ($asset) {
-                $asset->status = 0;
-                // Save the changes
-                $asset->save();
-                return redirect()->back();
-            }
-        }
-
-        public function getHolidayHomes(){
-            $assets = Holiday_Homes::where('status', 1)->get();
-            return view('admin.services.holidayHomes',compact('assets'));
-        }
-
-        public function storeHolidayHomesService(Request $request){
-            $request->validate([
-                'title' => [
-                    'required','string','max:50',
-                ],
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description'=>'required',
-            ]);
-            $image = $request->file('image');
-            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
-            $asset_image = $image->storeAs('uploads', $tempName, 'public');
-            $assets = Holiday_Homes::create([
-                'title'=>$request->title,
-                'description'=> $request->description,
-                'image'=>$asset_image,
-                'status'=>1,
-            ]);
-            if($assets){
-                return redirect()->back();
-            }
-        }
-        public function removeHolidayHomesService($id){
-            $assetId = decrypt($id);
-            $asset = Holiday_Homes::find($assetId);
-            if ($asset) {
-                $asset->status = 0;
-                // Save the changes
-                $asset->save();
                 return redirect()->back();
             }
         }
@@ -378,14 +262,68 @@ class AdminController extends Controller
             }
         }
 
-        public function investmentAdvisory(){
-            return view('admin.services.investAdvisory');
-        }
 
         public function allServices(){
-            $services = Service::join('service_categories','services.category','service_categories.id')->select('services.title','services.description','service_categories.category')->get();
+            $services = Service::join('service_categories','services.category','service_categories.id')
+            ->where('services.status', 1)
+            ->select('services.title','services.description','service_categories.category','services.id')->get();
 
             return view('admin.services.allServices',compact('services'));
         }
 
+        public function getCommunity(){
+            return view('admin.communities.addCommunity');
+        }
+
+        public function storeCommunity(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:150',
+                ],
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = Community::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'category'=>$request->category,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back()->with('success', 'Data Saved Successfully.');
+            }
+        }
+
+        public function getFeature(){
+            $communities = Community::all();
+            return view('admin.communities.addFeature',compact('communities'));
+        }
+
+        public function storeFeature(Request $request){
+            $request->validate([
+                'title' => [
+                    'required','string','max:150',
+                ],
+                'community'=>'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description'=>'required',
+            ]);
+            $image = $request->file('image');
+            $tempName = uniqid('asset_', true) . '.' . $image->getClientOriginalExtension();
+            $asset_image = $image->storeAs('uploads', $tempName, 'public');
+            $assets = Feature::create([
+                'title'=>$request->title,
+                'description'=> $request->description,
+                'image'=>$asset_image,
+                'community'=>$request->community,
+                'status'=>1,
+            ]);
+            if($assets){
+                return redirect()->back()->with('success', 'Data Saved Successfully.');
+            }
+        }
 }
